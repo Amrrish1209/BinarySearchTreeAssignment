@@ -1,6 +1,8 @@
 package com.bridgelabz.binarysearchtrees;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -52,10 +54,15 @@ public class MyBinaryNodeTest {
 		assertEquals(70, root.getRight().getKey().intValue());
 		assertEquals(60, root.getRight().getLeft().getKey().intValue());
 		assertEquals(95, root.getRight().getRight().getKey().intValue());
-		System.out.println(root.getRight().getLeft().getRight().getKey());
 		assertEquals(65, root.getRight().getLeft().getRight().getKey().intValue());
 		assertEquals(67, root.getRight().getLeft().getRight().getRight().getKey().intValue());
 		assertEquals(63, root.getRight().getLeft().getRight().getLeft().getKey().intValue());
 
 	}
+
+	@Test
+	public void testSearch() {
+		assertEquals(new Integer(63), tree.search(63).getKey());
+	}
+
 }

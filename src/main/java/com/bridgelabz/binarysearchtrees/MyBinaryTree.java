@@ -58,4 +58,18 @@ public class MyBinaryTree<T extends Comparable<T>> {
 		}
 	}
 
+	public MyBinaryNode<T> search(T key) {
+		return search(key, root);
+	}
+
+	private MyBinaryNode<T> search(T key, MyBinaryNode<T> node) {
+		if (node == null || node.getKey().equals(key)) {
+			return node;
+		} else if (key.compareTo(node.getKey()) < 0) {
+			return search(key, node.getLeft());
+		} else {
+			return search(key, node.getRight());
+		}
+	}
+
 }
