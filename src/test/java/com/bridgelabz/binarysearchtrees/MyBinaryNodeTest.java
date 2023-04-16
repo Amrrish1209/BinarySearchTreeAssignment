@@ -1,18 +1,32 @@
 package com.bridgelabz.binarysearchtrees;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import org.junit.Before;
 import org.junit.Test;
 
 public class MyBinaryNodeTest {
 
-	@Test
-	public void testInsert() {
-		MyBinaryNode<Integer> root = new MyBinaryNode<Integer>(56);
-		root.insert(30);
-		root.insert(70);
+	private MyBinaryTree<Integer> tree;
 
-		assertEquals("Checking root key", Integer.valueOf(56), root.key);
-		assertEquals("Checking left key", Integer.valueOf(30), root.left.key);
-		assertEquals("Checking right key", Integer.valueOf(70), root.right.key);
+	@Before
+	public void setUp() {
+		tree = new MyBinaryTree<Integer>();
+		tree.insert(56);
+		tree.insert(30);
+		tree.insert(70);
+		tree.insert(22);
+		tree.insert(40);
+		tree.insert(60);
+		tree.insert(95);
+	}
+
+	@Test
+	public void testSize() {
+		assertEquals(7, tree.size());
+	}
+
+	@Test
+	public void testLeafNodeCount() {
+		assertEquals(4, tree.leafNodeCount());
 	}
 }
