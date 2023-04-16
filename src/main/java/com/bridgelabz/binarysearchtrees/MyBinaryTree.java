@@ -1,33 +1,46 @@
 package com.bridgelabz.binarysearchtrees;
 
-public class MyBinaryTree<Key extends Comparable<Key>> {
+public class MyBinaryTree<T extends Comparable<T>> {
 
-	private MyBinaryNode<Key> root;
+	private MyBinaryNode<T> root;
 
-	public void insert(Key key) {
-		root = insert(root, key);
+	public void insert(T key) {
+		if (root == null) {
+			root = new MyBinaryNode<T>(key);
+		} else {
+			insert(key, root);
+		}
 	}
 
-	private MyBinaryNode<Key> insert(MyBinaryNode<Key> node, Key key) {
-		if (node == null) {
-			return new MyBinaryNode<Key>(key);
-		} else if (key.compareTo(node.key) < 0) {
-			node.left = insert(node.left, key);
-		} else if (key.compareTo(node.key) > 0) {
-			node.right = insert(node.right, key);
+	private void insert(T key, MyBinaryNode<T> node) {
+		if (key.compareTo(node.getKey()) < 0) {
+			if (node.getLeft() == null) {
+				node.setLeft(new MyBinaryNode<T>(key));
+			} else {
+				insert(key, node.getLeft());
+			}
+		} else {
+			if (node.getRight() == null) {
+				node.setRight(new MyBinaryNode<T>(key));
+			} else {
+				insert(key, node.getRight());
+			}
 		}
-		return node;
+	}
+
+	public MyBinaryNode<T> getRoot() {
+		return root;
 	}
 
 	public int size() {
 		return size(root);
 	}
 
-	private int size(MyBinaryNode<Key> node) {
+	private int size(MyBinaryNode<T> node) {
 		if (node == null) {
 			return 0;
 		} else {
-			return 1 + size(node.left) + size(node.right);
+			return size(node.getLeft()) + 1 + size(node.getRight());
 		}
 	}
 
@@ -35,13 +48,13 @@ public class MyBinaryTree<Key extends Comparable<Key>> {
 		return leafNodeCount(root);
 	}
 
-	private int leafNodeCount(MyBinaryNode<Key> node) {
+	private int leafNodeCount(MyBinaryNode<T> node) {
 		if (node == null) {
 			return 0;
-		} else if (node.left == null && node.right == null) {
+		} else if (node.getLeft() == null && node.getRight() == null) {
 			return 1;
 		} else {
-			return leafNodeCount(node.left) + leafNodeCount(node.right);
+			return leafNodeCount(node.getLeft()) + leafNodeCount(node.getRight());
 		}
 	}
 
